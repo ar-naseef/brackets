@@ -298,7 +298,8 @@ define([
         self._autoRecoverFileSystem = options.autoRecoverFileSystem;
 
         // Project disk capacity.  If not specified, use default
-        var _capacity = options.capacity || Sizes.DEFAULT_PROJECT_SIZE_LIMIT;
+        // var _capacity = options.capacity || Sizes.DEFAULT_PROJECT_SIZE_LIMIT;
+        var _capacity = Sizes.DEFAULT_PROJECT_SIZE_LIMIT;
 
         // Public getters for state. Most of these aren't useful until bramble.ready()
         self.getID = function() { return _id; };

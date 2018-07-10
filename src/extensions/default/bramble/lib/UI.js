@@ -295,9 +295,12 @@ define(function (require, exports, module) {
      */
     function setProjectSizeInfo(info) {
         var currentSize = Sizes.formatBytes(info.size);
-
+        console.log("info");
+        console.log(info);
         // Normalize to between 0 - 100%
         var percentUsed = (Math.max(Math.min(info.percentUsed * 100, 100), 0)).toFixed(2) + "%";
+
+        console.log(percentUsed + " : <- current size");
 
         SidebarView._updateProjectSizeIndicator(currentSize, DEFAULT_PROJECT_SIZE_LIMIT_FORMATTED, percentUsed);
     }

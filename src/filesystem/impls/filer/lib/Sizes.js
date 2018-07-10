@@ -11,13 +11,13 @@ define(function (require, exports, module) {
     var MB = 1000 * KB;
 
     // 5MB default size limit for total project size on disk
-    var DEFAULT_PROJECT_SIZE_LIMIT = 5 * MB;
+    var DEFAULT_PROJECT_SIZE_LIMIT = 20 * MB;
 
     // 3MB size limit for imported files.
-    var REGULAR_FILE_SIZE_LIMIT_MB = 3 * MB;
+    var REGULAR_FILE_SIZE_LIMIT_MB = 5 * MB;
 
     // 5MB size limit for imported archives (zip & tar)
-    var ARCHIVE_FILE_LIMIT_MB = 5 * MB;
+    var ARCHIVE_FILE_LIMIT_MB = 20 * MB;
 
     // 12MB size limit for imported image files that can be auto-resized (png, jpg)
     var RESIZABLE_IMAGE_FILE_LIMIT_MB = 12 * MB;

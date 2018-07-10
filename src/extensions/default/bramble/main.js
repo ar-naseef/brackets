@@ -148,6 +148,7 @@ define(function (require, exports, module) {
         window.removeEventListener("message", init, false);
         window.addEventListener("message", RemoteCommandHandler.handleRequest, false);
 
+
         // Set the mount point for the project we want to open and signal
         // to Brackets that it can keep going, which will pick this up.
         BrambleStartupState.project.init({

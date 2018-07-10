@@ -150,6 +150,10 @@ define(function (require, exports, module) {
 
     // Updates the project size indicator UI
     function _updateProjectSizeIndicator(currentSize, maxSize, percent) {
+        console.log("currentSize: " + currentSize);
+        console.log("max size: " + maxSize);
+        console.log("bar %: " + percent);
+        
         $projectSizeIndicator.removeClass("project-size-warning project-size-exceeded");
 
         percent = parseInt(percent);
