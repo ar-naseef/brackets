@@ -45,7 +45,8 @@ define(function (require, exports, module) {
         case '.js':
             return 'text/javascript';
         case '.json':
-            return 'application/javascript';
+            // return 'application/javascript';
+            return 'text/javascript'; // TODO: added by naseef
         case '.txt':
         // fallsthrough
         case '.markdown':

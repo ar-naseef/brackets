@@ -236,8 +236,8 @@ define(function (require, exports, module) {
     }
 
     function handleRequest(e) {
-        console.log("event");
-        console.log(e);
+        // console.log("event");
+        // console.log(e);
 
         var remoteRequest;
         try {
@@ -253,8 +253,8 @@ define(function (require, exports, module) {
 
         // If arguments are sent, we make sure they are in the form of an array
         var args = remoteRequest.args;
-        console.log("remoteRequest");
-        console.log(remoteRequest);
+        // console.log("remoteRequest");
+        // console.log(remoteRequest);
 
         if(!_.isArray(args)) {
             args = [args];

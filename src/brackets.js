@@ -111,6 +111,8 @@ define(function (require, exports, module) {
     require("thirdparty/lodash");
     require("language/XMLUtils");
     require("language/JSONUtils");
+    // require("thirdparty/smooshpack");
+    // chaanged here..
 
     // DEPRECATED: In future we want to remove the global CodeMirror, but for now we
     // expose our required CodeMirror globally so as to avoid breaking extensions in the
