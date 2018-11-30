@@ -241,6 +241,7 @@ define(function (require, exports, module) {
         // The "should select" event signals that we need to open the document based on file tree
         // activity.
         this.model.on(ProjectModel.EVENT_SHOULD_SELECT, function (e, data) {
+            // data has the path. - naseef
             if (data.add) {
                 FileViewController.openFileAndAddToWorkingSet(data.path).fail(_.partial(_revertSelection, data.previousPath, !data.hadFocus));
             } else {

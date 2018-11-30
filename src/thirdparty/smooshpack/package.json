@@ -1,8 +1,8 @@
 {
   "_from": "smooshpack",
-  "_id": "smooshpack@0.0.49",
+  "_id": "smooshpack@0.0.52",
   "_inBundle": false,
-  "_integrity": "sha512-BBHwUPOSCDk1n1+8666iR2pAFdoBA1+CFkfMWRDIK8wjEYI+yT782gOJmn4l442qkOPY2Th7cdzEkqKrWNuzXw==",
+  "_integrity": "sha512-JF24+HD2hvoEXx0fDRVQETewElGIERgE02ZdhbWBUFk6rAWn7MKihC2jf/exTOrvm/4xVnuJNdEX+IO8jgS+zA==",
   "_location": "/smooshpack",
   "_phantomChildren": {},
   "_requested": {
@@ -19,10 +19,10 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/smooshpack/-/smooshpack-0.0.49.tgz",
-  "_shasum": "1c3d99b12cdf4984ee9165d1d045961c2985d7d7",
+  "_resolved": "https://registry.npmjs.org/smooshpack/-/smooshpack-0.0.52.tgz",
+  "_shasum": "22e3b59a26c660812c5fb52599c95885213f3e73",
   "_spec": "smooshpack",
-  "_where": "/home/black/appler/brackets",
+  "_where": "/home/black/my_projects/sandpack-test",
   "author": {
     "name": "Ives van Hoorne",
     "email": "ives.v.h@gmail.com"
@@ -38,7 +38,7 @@
     }
   },
   "dependencies": {
-    "codesandbox-api": "^0.0.19",
+    "codesandbox-api": "^0.0.20",
     "codesandbox-import-utils": "^1.2.3",
     "lodash.isequal": "^4.5.0"
   },
@@ -141,5 +141,5 @@
   },
   "sideEffects": false,
   "typings": "dist/types/sandpack.d.ts",
-  "version": "0.0.49"
+  "version": "0.0.52"
 }

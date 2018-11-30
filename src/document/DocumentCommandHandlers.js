@@ -332,6 +332,7 @@ define(function (require, exports, module) {
             });
 
             var file = FileSystem.getFileForPath(fullPath);
+            // Reading files by passing filepath - naseef
             MainViewManager._open(paneId, file, options)
                 .done(function () {
                     result.resolve(file);

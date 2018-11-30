@@ -230,6 +230,7 @@ module.exports = function (grunt) {
                         'src/bramble/client/**/*.js',
                         'src/bramble/thirdparty/**/*.js',
                         'src/bramble/ChannelUtils.js',
+                        'src/editor/*.js',
                         'thirdparty/filer/dist/filer.min.js',
                     ]
                 },

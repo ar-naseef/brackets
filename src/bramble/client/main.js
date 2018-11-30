@@ -36,8 +36,9 @@ define([
     "EventEmitter",
     "bramble/client/StateManager",
     "bramble/client/ProjectStats",
-    "filesystem/impls/filer/lib/Sizes"
-], function(Filer, ChannelUtils, EventEmitter, StateManager, ProjectStats, Sizes) {
+    "filesystem/impls/filer/lib/Sizes",
+    "editor/sandpackTranspile"
+], function(Filer, ChannelUtils, EventEmitter, StateManager, ProjectStats, Sizes, sandpackTranspile) {
     "use strict";
 
     // PROD URL for Bramble, which can be changed below
@@ -139,6 +140,19 @@ define([
 
     Bramble.getFileSystem = function() {
         return _fs;
+    };
+
+    // window.sandpackObj = {}
+    Bramble.sayHello = function(obj) {
+        console.log(document);
+        console.log(document.querySelector("#bramble-iframe-browser"));
+        // document.activeElement.contentWindow.querySelector("iframe")
+        // console.log(obj);
+        console.log('calling sandpack transpile');
+        sandpackTranspile.initFileTree(obj);
+        // window.sandpackObj = obj;
+        // console.log(obj);
+        // console.log(window.sandpack);
     };
 
     // NOTE: THIS WILL DESTROY DATA! For error cases only, or to wipe the disk.

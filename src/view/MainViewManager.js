@@ -1288,7 +1288,7 @@ define(function (require, exports, module) {
             openWithFactory(factory);
         } else {
             // If this is a text type, open normally.
-            if(Content.isUTF8Encoded(Path.extname(file.fullPath)) || options.forceEditorOpen) {
+            if(Content.isUTF8Encoded(Path.extname(file.fullPath)) || options.forceEditorOpen) { //TODO: always open all the file types- naseef
                 DocumentManager
                     .getDocumentForPath(file.fullPath)
                     .done(function (doc) {

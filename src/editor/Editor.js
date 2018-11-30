@@ -1036,6 +1036,138 @@ define(function (require, exports, module) {
         this._codeMirror.on("blur", function () {
             self._focused = false;
             self.trigger("blur", self);
+
+            console.log("on blur >>>>>>>");
+            // var fs = bramble.getFileSystem();
+            // // console.log(fs);
+            // var walk = function(dir, done) {
+            //     var results = [];
+            //     fs.readdir(dir, function(err, list) {
+            //         console.log(list);
+            //         if (err) return done(err);
+            //         var i = 0;
+            //         (function next() {
+            //             var file = list[i++];
+            //             if (!file) return done(null, results);
+            //             file = dir + '/' + file;
+            //             fs.stat(file, function(err, stat) {
+            //                 if (stat && stat.isDirectory()) {
+            //                 walk(file, function(err, res) {
+            //                     results = results.concat(res);
+            //                     next();
+            //                 });
+            //                 } else {
+            //                 results.push(file);
+            //                 next();
+            //                 }
+            //             });
+            //         })();
+            //     });
+            // };
+        
+            // var pathSplit = window.location.pathname.split('/')
+            // var sandpackObj = {
+            //     files: {},
+            // };
+            // walk(`/7`, function(err, res) {
+            //     res.forEach(file => {
+            //         fs.readFile(file, function(err, res) {
+            //         res = res.toString('utf8');
+            //         var arr = file.split('/').slice(4, file.split('/').length);
+            //         var path = `/${arr.join('/')}`
+            //         sandpackObj.files[path] = {
+            //             code: res
+            //         }
+            //         })
+            //     });
+            //     console.log(sandpackObj);
+            //   // Bramble.sayHello(sandpackObj);
+            // })
+            // read the file from here.
+
+            // console.log("test");
+        
+            // File.readFile('/nas/projects/newDep3/package.json', {}, (err, d) => {
+            //     console.log(d);
+            //     console.log("content of package.json")
+            // })
+
+            // var File1 = new File('/nas/projects/newDep3/package.json');
+            // File1.read({encoding: "utf8"}, (e, d, s) => {
+            //     console.log("this is test")
+            //     console.log(d);
+            //     console.log(e);
+            //     console.log(s);
+
+            // })
+
+            // get the root files/dir object
+            var rootObject = fileSystem.getDirectoryForPath('/')._fileSystem._watchedRoots;
+            var basePath = Object.keys(rootObject)[0];
+            rootObject = rootObject[basePath].entry;
+            console.log(rootObject);
+
+            // get all the final file paths from the rootObject
+            // var dirList = [];
+            function getFinalPaths(obj, filesList) {
+                obj._contents.forEach(function  (elem){
+                    if (elem._isFile) {
+                        filesList.push(elem._path);
+                    } else if (elem._isDirectory) {
+                        getFinalPaths(elem, filesList);
+                    }
+                });
+                return filesList;
+            }
+
+            // for (var obj in rootObject) {
+            //     getFinalPaths(obj)
+            // }
+            var filesList = getFinalPaths(rootObject, []);
+            var filesListRelative = [];
+            // rootObject.forEach(function(obj) {
+            //     getFinalPaths(obj);
+            // })
+
+            filesList.forEach(function(file) {
+                // TODO: give the absolute path
+                var arr = file.split('/').slice(4, file.split('/').length);
+                var path = '/'+arr.join('/');
+                filesListRelative.push(path);
+            });
+
+            console.log(filesListRelative);
+
+            var sandpackInfo = {
+                files: {},
+                entry: '/index.js',
+            };
+            filesList.forEach(function(file) {
+                // TODO: give the absolute path
+                var arr = file.split('/').slice(4, file.split('/').length);
+                var path = '/'+arr.join('/');
+                sandpackInfo.files[path] = {
+                    code: fileSystem.getFileForPath(file)._contents
+                };
+            });
+
+            console.log(sandpackInfo);
+
+            // fileSystem._watchedRoots.(value::root file path).entry._contents[]
+            // console.log(fileSystem.getDirectoryForPath('/nas/projects/newDep2/src/'));
+            // console.log(fileSystem.getDirectoryForPath('/nas/projects/newDep2/src2'));
+
+
+            // update the preview from here.
+            if (filesListRelative.includes("/package.json")) {
+                if (document.querySelector('#bramble-iframe-browser')) {
+                    SandpackManager = new window.sandpack.Manager('#bramble-iframe-browser', sandpackInfo);
+                }
+                if (SandpackManager) {
+                    SandpackManager.updatePreview(sandpackInfo);
+                }
+            }
+
         });
 
         this._codeMirror.on("update", function (instance) {

@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -74,66 +72,6 @@ function __generator(thisArg, body) {
     }
 }
 
-// Unique ID creation requires a high quality random # generator.  In node.js
-// this is pretty straight-forward - we use the crypto API.
-
-
-
-var rng = function nodeRNG() {
-  return crypto.randomBytes(16);
-};
-
-/**
- * Convert array of 16 byte values to UUID string format of the form:
- * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
- */
-var byteToHex = [];
-for (var i = 0; i < 256; ++i) {
-  byteToHex[i] = (i + 0x100).toString(16).substr(1);
-}
-
-function bytesToUuid(buf, offset) {
-  var i = offset || 0;
-  var bth = byteToHex;
-  return bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]];
-}
-
-var bytesToUuid_1 = bytesToUuid;
-
-function v4(options, buf, offset) {
-  var i = buf && offset || 0;
-
-  if (typeof(options) == 'string') {
-    buf = options === 'binary' ? new Array(16) : null;
-    options = null;
-  }
-  options = options || {};
-
-  var rnds = options.random || (options.rng || rng)();
-
-  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
-  rnds[6] = (rnds[6] & 0x0f) | 0x40;
-  rnds[8] = (rnds[8] & 0x3f) | 0x80;
-
-  // Copy bytes to buffer, if provided
-  if (buf) {
-    for (var ii = 0; ii < 16; ++ii) {
-      buf[i + ii] = rnds[ii];
-    }
-  }
-
-  return buf || bytesToUuid_1(rnds);
-}
-
-var v4_1 = v4;
-
 var __awaiter$1 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -149,8 +87,8 @@ var __generator$1 = (undefined && undefined.__generator) || function (thisArg, b
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -168,6 +106,10 @@ var __generator$1 = (undefined && undefined.__generator) || function (thisArg, b
         } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
+};
+var generateId = function () {
+    // Such a random ID
+    return Math.random() * 1000000 + Math.random() * 1000000 + '';
 };
 var Protocol = /** @class */ (function () {
     function Protocol(type, handleMessage, target) {
@@ -209,7 +151,7 @@ var Protocol = /** @class */ (function () {
             });
         }); };
         this.createConnection();
-        this.internalId = v4_1();
+        this.internalId = generateId();
     }
     Protocol.prototype.getTypeId = function () {
         return "p-" + this.type;
@@ -223,7 +165,7 @@ var Protocol = /** @class */ (function () {
     Protocol.prototype.sendMessage = function (data) {
         var _this = this;
         return new Promise(function (resolve) {
-            var messageId = v4_1();
+            var messageId = generateId();
             var message = {
                 $originId: _this.internalId,
                 $type: _this.getTypeId(),
@@ -2458,7 +2400,7 @@ function createMissingPackageJSON(files, dependencies, entry) {
     return newFiles;
 }
 
-var version = "0.0.49";
+var version = "0.0.52";
 
 var BUNDLER_URL = process.env.CODESANDBOX_ENV === 'development'
     ? 'http://localhost:3001'
@@ -2575,7 +2517,7 @@ var PreviewManager = /** @class */ (function () {
                 isBinary: false,
             }, _a)));
         }, {});
-        return fetch('https://codesandbox.io/api/v1/sandboxes/define', {
+        return fetch('https://codesandbox.io/api/v1/sandboxes/define?json=1', {
             method: 'POST',
             body: JSON.stringify({ files: paramFiles }),
             headers: {

@@ -194,7 +194,9 @@ define(function (require, exports, module) {
             return;
         }
 
-        win.postMessage(msgStr, "*");
+        if(win) {
+            win.postMessage(msgStr, "*");
+        }
     }
 
     /**
