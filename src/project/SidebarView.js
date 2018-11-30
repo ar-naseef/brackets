@@ -153,6 +153,8 @@ define(function (require, exports, module) {
         console.log("currentSize: " + currentSize);
         console.log("max size: " + maxSize);
         console.log("bar %: " + percent);
+
+        
         
         $projectSizeIndicator.removeClass("project-size-warning project-size-exceeded");
 

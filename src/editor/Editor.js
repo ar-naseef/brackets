@@ -78,6 +78,12 @@ define(function (require, exports, module) {
         ViewUtils          = require("utils/ViewUtils"),
         MainViewManager    = require("view/MainViewManager"),
         _                  = require("thirdparty/lodash");
+        // sandpack           = require('./sandpack');
+        
+        // sandpack.initFileTree();
+        // setInterval(function(){
+        //     sandpack.printChanged();
+        // }, 3000);
 
     /** Editor preferences */
     var CLOSE_BRACKETS      = "closeBrackets",
@@ -441,6 +447,7 @@ define(function (require, exports, module) {
         });
         this.on("change", function (event, editor, changeList) {
             self._handleEditorChange(changeList);
+            // console.log("edtor changed.. !!");
         });
         this.on("focus", function (event, editor) {
             if (self._hostEditor) {
@@ -1000,6 +1007,7 @@ define(function (require, exports, module) {
         // change objects. Our own event is still called just "change".
         this._codeMirror.on("changes", function (instance, changeList) {
             self.trigger("change", self, changeList);
+            console.log("code changed..! now again test");
         });
         this._codeMirror.on("beforeChange", function (instance, changeObj) {
             self.trigger("beforeChange", self, changeObj);

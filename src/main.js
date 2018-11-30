@@ -32,6 +32,13 @@ require.config({
         "text": "thirdparty/text/text",
         "i18n": "thirdparty/i18n/i18n",
         "react": "thirdparty/react",
+        // "smooshpack": "../node_modules/smooshpack/dist/sandpack.umd",
+        // "smooshpack": "thirdparty/smooshpack/dist/sandpack.umd",
+        // "smooshpack": "https://cdn.jsdelivr.net/npm/smooshpack@0.0.49/dist/sandpack.umd.min",
+        // "crypto": "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/aes.min",
+        // "core": "https://cdn.jsdelivr.net/npm/core@1.0.113/lib/index.min",
+        // "md5": "https://cdn.jsdelivr.net/npm/md5@2.2.1/md5.min",
+        // "cipher-core": "https://cdn.jsdelivr.net/npm/@valerybugakov/cipher-core@1.0.2/index.min",
 
         // The file system implementation. Change this value to use different
         // implementations (e.g. cloud-based storage).
